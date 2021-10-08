@@ -7,7 +7,7 @@ if ($registro == "ok") {
 }
 
 ?>
-<h1>Ingreso</h1>
+<h1>registro</h1>
 <form action="" method="post">
     <div class="form-group">
         <label for="email">Correo:</label>
