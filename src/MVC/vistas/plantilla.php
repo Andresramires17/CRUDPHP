@@ -53,13 +53,13 @@
         <div class="container">
             <ul class="nav nav-justified py-2 nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.php?pagina=registro">REGISTRO</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?pagina=ingreso">INGRESO</a>
+                    <a class="nav-link" href="index.php?pagina=registro">REGISTRO</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?pagina=inicio">INICIO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?pagina=ingreso">INGRESO</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?pagina=salir">SALIR</a>
@@ -79,15 +79,17 @@
 
             if (isset($_GET["pagina"])) {
 
-                if ($_GET["pagina"] == "registro" ||
+                if (
+                    $_GET["pagina"] == "registro" ||
                     $_GET["pagina"] == "ingreso" ||
                     $_GET["pagina"] == "inicio" ||
-                    $_GET["pagina"] == "salir"){
-                        
-                        include "paginas/" . $_GET["pagina"] . ".php";
-                    }
-            }else{
-                
+                    $_GET["pagina"] == "salir"
+                ) {
+
+                    include "paginas/" . $_GET["pagina"] . ".php";
+                }
+            } else {
+
                 include "paginas/registro.php";
             }
 
