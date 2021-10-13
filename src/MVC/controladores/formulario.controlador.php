@@ -1,6 +1,7 @@
 <?php
      class ControladorFormulario{
 
+        //registrar datos
         static public function ctrRegistro(){
 
             if (isset($_POST["RegNombre"])) {
@@ -16,6 +17,14 @@
                 return $respuesta;
                 
             }
+        }
+        //listar datos
+        static public function ctrListarRegistro(){
+
+            $tabla = "registros";
+            $respuesta = ModelosFormus::mdlListarRegistro($tabla);
+
+            return $respuesta;
         }
      }
 ?>

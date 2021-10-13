@@ -22,6 +22,17 @@
         }
 
      }
+
+    static public function mdlListarRegistro($tabla){
+
+        $stmt = conexion::conectar()->prepare("SELECT correo,nombre,pwd,fecha fROM $tabla");
+        $stmt->execute();
+        
+        //fetchAll(): devolver todos los registros
+        //fetch(): devuelve un solo registro
+        return $stmt->fetchAll();
+
+    }
        
 
      }
