@@ -12,7 +12,7 @@
                                 "nombre"=> $_POST["RegNombre"],
                                 "pwd" => $_POST["RegPass"] );
                 
-                $respuesta = ModelosFormus::mdlRegistro($tabla,$datos);
+                $respuesta = ModeloVistaRegistro::mdlRegistro($tabla,$datos);
 
                 return $respuesta;
                 
@@ -22,7 +22,7 @@
         static public function ctrListarRegistro(){
 
             $tabla = "registros";
-            $respuesta = ModelosFormus::mdlListarRegistro($tabla);
+            $respuesta = ModeloVistaRegistro::mdlListarRegistro($tabla);
 
             return $respuesta;
         }
