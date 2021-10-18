@@ -1,7 +1,7 @@
 <?php
      require_once "conexion.php";
 
-     class ModeloVistaRegistro{
+     class ModeloFormularios{
 
         //registro
 
@@ -23,14 +23,32 @@
 
      }
 
-    static public function mdlListarRegistro($tabla){
+    static public function mldSeleccionRegistro($tabla, $item, $valor){
 
-        $stmt = conexion::conectar()->prepare("SELECT correo,nombre,pwd,fecha fROM $tabla");
-        $stmt->execute();
+        if ($item == null && $valor == null) {
+            $stmt = conexion::conectar()->prepare(" SELECT ID,correo,nombre,fecha, 
+                                                    DATE_FORMAT(fecha,'%Y/%m/%d') AS fecha 
+                                                    fROM $tabla 
+                                                    ORDER BY ID DESC");
+            $stmt->execute();
+            //fetchAll(): devolver todos los registros
+            //fetch(): devuelve un solo registro
+            return $stmt->fetchAll();
+        }else {
+            $stmt = conexion::conectar()->prepare(" SELECT *,DATE_FORMAT(fecha,'%Y/%m/%d') AS fecha 
+                                                    FROM $tabla
+                                                    WHERE $item = :$item 
+                                                    ORDER BY ID DESC");
+
+            $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);            
+
+            $stmt->execute();
+            //fetchAll(): devolver todos los registros
+            //fetch(): devuelve un solo registro
+            return $stmt->fetch();
+        }
+
         
-        //fetchAll(): devolver todos los registros
-        //fetch(): devuelve un solo registro
-        return $stmt->fetchAll();
 
     }
        

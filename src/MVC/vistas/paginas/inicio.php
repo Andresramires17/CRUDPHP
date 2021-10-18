@@ -8,6 +8,8 @@ $usuario = ControladorFormulario::ctrListarRegistro();
 <table class="table">
     <thead>
         <tr>
+            <th>EN VISTA</th>
+            <th>En BD</th>
             <th>CORREO</th>
             <th>NOMBRE</th>
             <th>FECHA DE REGISTRO</th>
@@ -17,9 +19,10 @@ $usuario = ControladorFormulario::ctrListarRegistro();
     <tbody>
         <?php foreach ($usuario as $key => $value) : ?>
             <tr>
+                <td><?php echo ($key + 1); ?></td>
+                <td><?php echo $value["ID"]; ?></td>
                 <td><?php echo $value["correo"]; ?></td>
                 <td><?php echo $value["nombre"]; ?></td>
-                <td><?php echo $value["pwd"]; ?></td>
                 <td><?php echo $value["fecha"]; ?></td>
                 <td>
                     <div class="btn-group">
