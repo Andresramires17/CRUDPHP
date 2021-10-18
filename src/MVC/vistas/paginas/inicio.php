@@ -1,5 +1,19 @@
 <?php
 
+if (!isset($_SESSION["ValidarIngreso"])) {
+
+    echo '<script>window.location = "index.php?pagina=ingreso";</script>';
+
+    return;
+}else {
+    if ($_SESSION["ValidarIngreso"] != "ok") {
+
+        echo '<script>window.location = "index.php?pagina=ingreso";</script>';
+
+        return;
+    }
+}
+
 $usuario = ControladorFormulario::ctrListarRegistro();
 
 

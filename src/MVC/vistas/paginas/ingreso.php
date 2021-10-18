@@ -23,7 +23,6 @@
             <?php
             $ingreso = new ControladorFormulario();
             $ingreso->ctrIngreso();
-
             ?>
             <button type="submit" class="btn btn-primary">Ingresar</button>
         </form>

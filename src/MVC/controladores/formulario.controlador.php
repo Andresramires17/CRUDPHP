@@ -40,6 +40,8 @@
                 //echo '<pre>'; print_r($respuesta);echo '<pre>';
                 if ($respuesta["correo"] == $_POST["IngrCorreo"] && $respuesta["pwd"] == $_POST["IngrPass"]) {
 
+                $_SESSION["ValidarIngreso"] = "ok";
+
                 //borrar caché
                 echo    '<script>
             
