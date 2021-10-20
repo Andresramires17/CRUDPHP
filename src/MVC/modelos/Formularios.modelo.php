@@ -23,7 +23,7 @@
 
      }
 
-    static public function mldSeleccionRegistro($tabla, $item, $valor){
+        static public function mldSeleccionRegistro($tabla, $item, $valor){
 
         if ($item == null && $valor == null) {
             $stmt = conexion::conectar()->prepare(" SELECT ID,correo,nombre,fecha, 
@@ -49,6 +49,27 @@
         }
 
         
+
+    }
+
+    static public function mdlActualizarRegistro($tabla, $datos){
+
+        $stmt = conexion::conectar()->prepare(" UPDATE $tabla 
+                                                SET nombre=:nombre,correo=:correo,pwd=:pwd
+                                                WHERE ID = :id");
+
+        $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
+        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":pwd", $datos["pwd"], PDO::PARAM_STR);
+        $stmt->bindParam(":id", $datos["ID"], PDO::PARAM_INT);
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            print_r(conexion::conectar()->errorInfo());
+        }
 
     }
        

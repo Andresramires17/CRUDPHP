@@ -5,7 +5,7 @@ if (!isset($_SESSION["ValidarIngreso"])) {
     echo '<script>window.location = "index.php?pagina=ingreso";</script>';
 
     return;
-}else {
+} else {
     if ($_SESSION["ValidarIngreso"] != "ok") {
 
         echo '<script>window.location = "index.php?pagina=ingreso";</script>';
@@ -14,7 +14,7 @@ if (!isset($_SESSION["ValidarIngreso"])) {
     }
 }
 
-$usuario = ControladorFormulario::ctrListarRegistro();
+$usuario = ControladorFormulario::ctrListarRegistro(null,null);
 
 
 ?>
@@ -40,8 +40,8 @@ $usuario = ControladorFormulario::ctrListarRegistro();
                 <td><?php echo $value["fecha"]; ?></td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                        <a href="index.php?pagina=editar&id=<?php echo $value['ID']; ?>" class="btn btn-warning"> <i class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                     </div>
                 </td>
             </tr>
