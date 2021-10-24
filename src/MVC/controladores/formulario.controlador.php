@@ -67,15 +67,16 @@
              }
         }
 
-        public function ctrActualizarRegistro(){
+        static public function ctrActualizarRegistro(){
 
         if (isset($_POST["updNombre"])) {
 
-            if (isset($_POST["updPass"]) != "") {
+            if (isset($_POST["updPass"]) == "") {
                 
-                $password = $_POST["updPass"];
-            }else {
+                
                 $password = $_POST["ActualPass"];
+            }else {
+                $password = $_POST["updPass"];
             }
 
             $tabla = "registros";
@@ -89,18 +90,35 @@
 
             $respuesta = ModeloFormularios::mdlActualizarRegistro($tabla, $datos);
 
-            if ($respuesta == 'ok') {
-                //borrar caché
-                echo '<script>
-            
-                    if (window.history.replaceState) {
-                        window.history.replaceState(null,null,window.location.href);
-                    } 
-                    </script>';
+            return $respuesta;
 
-                echo '<div class="alert alert-success">Usuario actualizado</div>';
-            }
         }
+     }
+
+     public function ctrEliminarRegistro(){
+
+        if (isset($_POST["delRegistro"])){
+
+            $tabla = "registros";
+            $valor = $_POST["delRegistro"];
+
+
+            $respuesta = ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
+
+            if ($respuesta == "ok") {
+                
+                echo    '<script>
+            
+                        if (window.history.replaceState) {
+                            window.history.replaceState(null,null,window.location.href);
+                            } 
+                            window.location = "index.php?pagina=inicio";
+                        </script>';
+
+            }
+
+        }
+
      }
      
 }

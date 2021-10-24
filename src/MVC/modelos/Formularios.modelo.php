@@ -54,14 +54,45 @@
 
     static public function mdlActualizarRegistro($tabla, $datos){
 
-        $stmt = conexion::conectar()->prepare(" UPDATE $tabla 
-                                                SET nombre=:nombre,correo=:correo,pwd=:pwd
+        if (isset($datos["pwd"]) == "" || isset($datos["pwd"]) == null ) {
+
+            $stmt = conexion::conectar()->prepare(" UPDATE $tabla 
+                                                    SET nombre=:nombre,correo=:correo
+                                                    WHERE ID = :id");
+
+            $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
+            $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+            $stmt->bindParam(":id", $datos["ID"], PDO::PARAM_INT);
+            
+        }else {
+            $stmt = conexion::conectar()->prepare(" UPDATE $tabla 
+                                                    SET nombre=:nombre,correo=:correo,pwd=:pwd
+                                                    WHERE ID = :id");
+
+            $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
+            $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+            $stmt->bindParam(":pwd", $datos["pwd"], PDO::PARAM_STR);
+            $stmt->bindParam(":id", $datos["ID"], PDO::PARAM_INT);
+            
+        }
+
+        if ($stmt->execute()) {
+
+            return "ok";
+        } else {
+
+            print_r(conexion::conectar()->errorInfo());
+        }
+
+    }
+
+    static public function mdlEliminarRegistro($tabla,$valor){
+        $stmt = conexion::conectar()->prepare(" DELETE 
+                                                FROM $tabla 
                                                 WHERE ID = :id");
 
-        $stmt->bindParam(":correo", $datos["correo"], PDO::PARAM_STR);
-        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-        $stmt->bindParam(":pwd", $datos["pwd"], PDO::PARAM_STR);
-        $stmt->bindParam(":id", $datos["ID"], PDO::PARAM_INT);
+        
+        $stmt->bindParam(":id", $valor, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
 

@@ -42,9 +42,31 @@ if (isset($_GET["id"])) {
                 </div>
             </div>
             <?php
-            $actualizar = new ControladorFormulario();
 
-            $actualizar->ctrActualizarRegistro();
+            $actualizar = ControladorFormulario::ctrActualizarRegistro();
+
+            if ($actualizar == 'ok') {
+                //borrar caché
+                echo '  <script>
+            
+                            if (window.history.replaceState) {
+                                window.history.replaceState(null,null,window.location.href);
+                            } 
+                        </script>';
+
+                echo '<div class="alert alert-success">Usuario actualizado</div>
+                
+                <script>
+            
+                    setTimeout(function(){
+
+                        window.location = "index.php?pagina=inicio";
+                    },1000);
+                </script>
+
+                ';
+            }
+ 
             ?>
             <button type="submit" class="btn btn-primary">Actualizar</button>
         </form>
